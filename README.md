@@ -1,4 +1,4 @@
-<img src="/public/assets/icon/favicon.png" align="right" />
+<img src="/public/assets/icon/favicon.png" align="left" />
 
 # Hunt
 
