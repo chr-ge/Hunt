@@ -26,6 +26,8 @@ import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
+import useAuth from "./hooks/useAuth";
+import UserContext from "./context/UserContext";
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -48,9 +50,12 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 const App: React.FC = () => {
+  const [user, setUser] = useAuth();
+
   return (
     <IonApp>
       <IonReactRouter>
+        <UserContext.Provider value={{ user, setUser }}>
         <IonTabs>
           <IonRouterOutlet>
             <Route
@@ -92,6 +97,7 @@ const App: React.FC = () => {
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
+        </UserContext.Provider>
       </IonReactRouter>
     </IonApp>
   );
