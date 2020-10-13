@@ -48,13 +48,13 @@ const Profile = ({ history }: RouteComponentProps) => {
                   <IonItem>
                     <IonIcon icon={personCircleOutline} slot="start" />
                     <IonLabel>
-                      <strong>{user.displayName}</strong>\<p>Username</p>
+                      <strong>{user.displayName}</strong><p>Username</p>
                     </IonLabel>
                   </IonItem>
                   <IonItem>
                     <IonIcon icon={mailOutline} slot="start" />
                     <IonLabel>
-                      <strong>{user.email}</strong>\<p>Email</p>
+                      <strong>{user.email}</strong><p>Email</p>
                     </IonLabel>
                   </IonItem>
                 </IonList>

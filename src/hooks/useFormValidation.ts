@@ -6,6 +6,8 @@ interface InitialState {
   name?: string;
   email: string;
   password?: string;
+  newPassword?: string;
+  currentPassword?: string;
 }
 
 function useFormValidation(

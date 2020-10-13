@@ -2,6 +2,8 @@ export interface Errors {
   name?: string;
   email?: string;
   password?: string;
+  newPassword?: string;
+  currentPassword?: string;
 }
 
 export default function validateSignup(values: Errors) {
