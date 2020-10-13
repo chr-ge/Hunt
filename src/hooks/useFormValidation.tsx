@@ -3,7 +3,7 @@ import { toast } from "../utils/toast";
 import { Errors } from "../components/Auth/validateSignup";
 
 interface InitialState {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }

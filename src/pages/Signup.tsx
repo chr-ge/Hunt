@@ -36,7 +36,7 @@ const Signup = ({ history }: RouteComponentProps) => {
     setBusy(true);
     const { name, email, password } = values;
     try {
-      await firebase.register(name, email, password);
+      await firebase.register(name!, email, password);
       toast("You have signed up successfully.");
       history.push("/");
     } catch (err) {
@@ -44,7 +44,7 @@ const Signup = ({ history }: RouteComponentProps) => {
       toast(err.message);
     }
     setBusy(false);
-  };
+  }
 
   return (
     <IonPage>
@@ -53,20 +53,44 @@ const Signup = ({ history }: RouteComponentProps) => {
       <IonContent>
         <IonItem lines="full">
           <IonLabel position="floating">Username</IonLabel>
-          <IonInput name="name" type="text" value={values.name} onIonChange={handleChange} required />
+          <IonInput
+            name="name"
+            type="text"
+            value={values.name}
+            onIonChange={handleChange}
+            required
+          />
         </IonItem>
         <IonItem lines="full">
           <IonLabel position="floating">Email</IonLabel>
-          <IonInput name="email" type="email" value={values.email} onIonChange={handleChange} required />
+          <IonInput
+            name="email"
+            type="email"
+            value={values.email}
+            onIonChange={handleChange}
+            required
+          />
         </IonItem>
         <IonItem lines="full">
           <IonLabel position="floating">Password</IonLabel>
-          <IonInput name="password" type="password" value={values.password} onIonChange={handleChange} required />
+          <IonInput
+            name="password"
+            type="password"
+            value={values.password}
+            onIonChange={handleChange}
+            required
+          />
         </IonItem>
 
         <IonRow>
           <IonCol>
-            <IonButton type="submit" color="primary" expand="block" onClick={handleSubmit} disabled={isSubmitting}> 
+            <IonButton
+              type="submit"
+              color="primary"
+              expand="block"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+            >
               Sign Up
             </IonButton>
           </IonCol>
