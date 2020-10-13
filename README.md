@@ -5,6 +5,6 @@
 **Hunt for new websites and applications.**
 
 ## Built With
-- React
+- React (Typescript)
 - Ionic
 - Firebase
