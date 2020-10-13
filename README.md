@@ -6,5 +6,5 @@
 
 ## Built With
 - React (Typescript)
-- Ionic
-- Firebase
+- Ionic Framework
+- Firebase (Auth & Firestore)
