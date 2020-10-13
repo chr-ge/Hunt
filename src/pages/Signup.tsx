@@ -36,7 +36,7 @@ const Signup = ({ history }: RouteComponentProps) => {
     setBusy(true);
     const { name, email, password } = values;
     try {
-      await firebase.register(name!, email, password);
+      await firebase.register(name!, email, password!);
       toast("You have signed up successfully.");
       history.push("/");
     } catch (err) {

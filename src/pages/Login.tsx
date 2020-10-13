@@ -36,7 +36,7 @@ const Login = ({ history }: RouteComponentProps) => {
     setBusy(true);
     const { email, password } = values;
     try {
-      await firebase.login(email, password);
+      await firebase.login(email, password!);
       toast("You have logged in successfully.");
       history.push("/");
     } catch (err) {

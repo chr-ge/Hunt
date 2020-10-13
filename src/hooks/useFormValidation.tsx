@@ -5,7 +5,7 @@ import { Errors } from "../components/Auth/validateSignup";
 interface InitialState {
   name?: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 function useFormValidation(
