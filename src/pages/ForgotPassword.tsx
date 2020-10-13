@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 import NavHeader from "../components/Header/NavHeader";
 import { toast } from "../utils/toast";
-import useFormValidation from "../hooks/useFormValidation.ts";
+import useFormValidation from "../hooks/useFormValidation";
 import validatePasswordReset from "../components/Auth/validatePasswordReset";
 import firebase from "../firebase";
 
