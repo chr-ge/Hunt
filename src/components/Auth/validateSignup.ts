@@ -1,4 +1,4 @@
-export interface Errors {
+export interface UserErrors {
   name?: string;
   email?: string;
   password?: string;
@@ -6,8 +6,8 @@ export interface Errors {
   currentPassword?: string;
 }
 
-export default function validateSignup(values: Errors) {
-  let errors: Errors = {};
+export default function validateSignup(values: UserErrors) {
+  let errors: UserErrors = {};
 
   //Name Errors
   if (!values.name) {

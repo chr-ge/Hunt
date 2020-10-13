@@ -1,7 +1,7 @@
-import { Errors } from "./validateSignup";
+import { UserErrors } from "./validateSignup";
 
-export default function validateEditProfile(values: Errors) {
-  let errors: Errors = {};
+export default function validateEditProfile(values: UserErrors) {
+  let errors: UserErrors = {};
 
   //Name Errors
   if (!values.name) {

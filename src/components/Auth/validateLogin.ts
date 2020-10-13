@@ -1,7 +1,7 @@
-import { Errors } from "./validateSignup";
+import { UserErrors } from "./validateSignup";
 
-export default function validateLogin(values: Errors) {
-  let errors: Errors = {};
+export default function validateLogin(values: UserErrors) {
+  let errors: UserErrors = {};
 
   // Email Errors
   if (!values.email) {
