@@ -13,10 +13,11 @@ import {
 } from "@ionic/react";
 import NavHeader from "../components/Header/NavHeader";
 import { toast } from "../utils/toast";
-import useFormValidation from "../hooks/useFormValidation";
+import useFormValidation, { UserInterface } from "../hooks/useFormValidation";
 import validateEditProfile from "../components/Auth/validateEditProfile";
 import firebase from "../firebase";
 import UserContext from "../context/UserContext";
+import { UserErrors } from "../components/Auth/validateSignup";
 
 const EditProfile = ({ history }: RouteComponentProps) => {
   const { user, setUser } = useContext(UserContext);
@@ -34,7 +35,7 @@ const EditProfile = ({ history }: RouteComponentProps) => {
     values,
     setValues,
     isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateEditProfile, authenticateUser);
+  } = useFormValidation<UserInterface, UserErrors>(INITIAL_STATE, validateEditProfile, authenticateUser);
   const [busy, setBusy] = useState(false);
 
   async function reauthenticate(email: string, password: string) {

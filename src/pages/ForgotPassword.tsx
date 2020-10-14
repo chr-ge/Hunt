@@ -13,9 +13,10 @@ import {
 } from "@ionic/react";
 import NavHeader from "../components/Header/NavHeader";
 import { toast } from "../utils/toast";
-import useFormValidation from "../hooks/useFormValidation";
+import useFormValidation, { UserInterface } from "../hooks/useFormValidation";
 import validatePasswordReset from "../components/Auth/validatePasswordReset";
 import firebase from "../firebase";
+import { UserErrors } from "../components/Auth/validateSignup";
 
 const INITIAL_STATE = {
   email: "",
@@ -27,7 +28,7 @@ const ForgotPassword = ({ history }: RouteComponentProps) => {
     handleChange,
     values,
     isSubmitting,
-  } = useFormValidation(
+  } = useFormValidation<UserInterface, UserErrors>(
     INITIAL_STATE,
     validatePasswordReset,
     handleResetPassword

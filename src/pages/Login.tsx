@@ -14,9 +14,10 @@ import {
 } from "@ionic/react";
 import NavHeader from "../components/Header/NavHeader";
 import { toast } from "../utils/toast";
-import useFormValidation from "../hooks/useFormValidation";
+import useFormValidation, { UserInterface } from "../hooks/useFormValidation";
 import validateLogin from "../components/Auth/validateLogin";
 import firebase from "../firebase";
+import { UserErrors } from "../components/Auth/validateSignup";
 
 const INITIAL_STATE = {
   email: "",
@@ -29,7 +30,7 @@ const Login = ({ history }: RouteComponentProps) => {
     handleChange,
     values,
     isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser);
+  } = useFormValidation<UserInterface, UserErrors>(INITIAL_STATE, validateLogin, authenticateUser);
   const [busy, setBusy] = useState(false);
 
   async function authenticateUser() {
