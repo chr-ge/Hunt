@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { toast } from "../utils/toast";
-import { UserErrors } from "../components/Auth/validateSignup";
-import { ProductErrors } from "../components/Product/validateCreateProduct";
 
 export interface UserInterface {
   name?: string;
@@ -19,7 +17,7 @@ export interface ProductInterface {
 
 function useFormValidation<T, E>(
   initialState: T,
-  validate: (values: E) => E,
+  validate: (values: T) => E,
   action: () => void
 ) {
   const [values, setValues] = useState(initialState);

@@ -11,11 +11,16 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
-import useFormValidation, { ProductInterface } from "../hooks/useFormValidation";
-import validateCreateProduct, { ProductErrors } from "../components/Product/validateCreateProduct";
+import useFormValidation, {
+  ProductInterface,
+} from "../hooks/useFormValidation";
+import validateCreateProduct, {
+  ProductErrors,
+} from "../components/Product/validateCreateProduct";
 import firebase from "../firebase";
 import UserContext from "../context/UserContext";
 import { toast } from "../utils/toast";
+import Upload from "../components/Form/Upload";
 import SmallHeader from "../components/Header/SmallHeader";
 import LargeHeader from "../components/Header/LargeHeader";
 
@@ -28,11 +33,12 @@ const INITIAL_STATE = {
 const Submit = ({ history }: RouteComponentProps) => {
   const { user } = useContext(UserContext);
   const [submitting, setSubmitting] = useState(false);
-  const { handleSubmit, handleChange, values } = useFormValidation<ProductInterface, ProductErrors>(
-    INITIAL_STATE,
-    validateCreateProduct,
-    handleCreate
-  );
+  const [thumb, setThumb] = useState<any[]>([]);
+  const [photos, setPhotos] = useState<any[]>([]);
+  const { handleSubmit, handleChange, values } = useFormValidation<
+    ProductInterface,
+    ProductErrors
+  >(INITIAL_STATE, validateCreateProduct, handleCreate);
 
   async function handleCreate() {
     try {
@@ -44,6 +50,34 @@ const Submit = ({ history }: RouteComponentProps) => {
       const { title, description, url } = values;
       const id = firebase.db.collection("products").doc().id;
 
+      await Promise.all([
+        ...thumb.map((f, i) =>
+          firebase.storage.ref().child(`products/${id}_thumb_${i}.jpg`).put(f)
+        ),
+
+        ...photos.map((f, i) =>
+          firebase.storage.ref().child(`products/${id}_photo_${i}.jpg`).put(f)
+        ),
+      ]);
+
+      const productPhotos = await Promise.all(
+        photos.map((_, i) =>
+          firebase.storage
+            .ref()
+            .child(`products/${id}_photo_${i}.jpg`)
+            .getDownloadURL()
+        )
+      );
+
+      const productThumbs = await Promise.all(
+        thumb.map((_, i) =>
+          firebase.storage
+            .ref()
+            .child(`products/${id}_thumb_${i}.jpg`)
+            .getDownloadURL()
+        )
+      );
+
       const newProduct = {
         title,
         url,
@@ -52,6 +86,8 @@ const Submit = ({ history }: RouteComponentProps) => {
           id: user.uid,
           name: user.displayName,
         },
+        thumbnail: productThumbs[0] || null,
+        photos: productThumbs,
         voteCount: 1,
         comments: [],
         votes: [
@@ -61,7 +97,8 @@ const Submit = ({ history }: RouteComponentProps) => {
         ],
         timestamp: Date.now(),
       };
-
+      setThumb([]);
+      setPhotos([]);
       await firebase.db.collection("products").doc(id).set(newProduct);
       toast("Product created successfully.");
       history.push("/");
@@ -107,6 +144,25 @@ const Submit = ({ history }: RouteComponentProps) => {
             required
           />
         </IonItem>
+        <IonRow>
+          <IonCol>
+            <Upload
+              files={thumb}
+              onChange={setThumb}
+              placeholder="Select Thumbnail"
+            />
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <Upload
+              files={photos}
+              onChange={setPhotos}
+              placeholder="Select Product Photos"
+              multiple
+            />
+          </IonCol>
+        </IonRow>
 
         <IonRow>
           <IonCol>
