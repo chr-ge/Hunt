@@ -7,4 +7,4 @@
 ## Built With
 - React w/ Typescript
 - Ionic Framework
-- Firebase (Auth & Firestore)
+- Firebase (Auth, Storage & Firestore)
